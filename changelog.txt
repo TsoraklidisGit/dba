@@ -1,3 +1,6 @@
 13.10.2023 
 
 Adding Docker image to the DBA app. 
+Updating README
+Adding Changelog 
+Adding basic frontend with javascript

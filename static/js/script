@@ -1,0 +1,48 @@
+// Function to make an AJAX request to the Go server for search
+function performSearch(armyID) {
+    fetch(`/getarmy?armyid=${armyID}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Search request failed with status ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            // Display the search results on the page
+            displaySearchResults(data);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+}
+
+// Function to display search results on the page
+function displaySearchResults(results) {
+    const resultsContainer = document.getElementById('search-results');
+    resultsContainer.innerHTML = '';
+
+    if (results.length === 0) {
+        resultsContainer.textContent = 'No results found.';
+    } else {
+        const ul = document.createElement('ul');
+        results.forEach(result => {
+            const li = document.createElement('li');
+            li.textContent = result;
+            ul.appendChild(li);
+        });
+        resultsContainer.appendChild(ul);
+    }
+}
+
+// Event listener for the search form submission
+document.getElementById('search-form').addEventListener('submit', function (event) {
+    event.preventDefault();
+    const query = document.getElementById('army-id').value;
+
+    if (armyID.trim() === '') {
+        alert('Please enter an Army ID.');
+        return;
+    }
+
+    performSearch(query);
+});

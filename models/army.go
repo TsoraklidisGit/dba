@@ -1,6 +1,6 @@
 package models
 
-// Army represents an army consisting of multiple units.
+// Army represents an army.
 type Army struct {
 	ID   int
 	Name string
